@@ -1,0 +1,5 @@
+---
+- name: enabled SELinux
+  selinux:
+    policy: targeted
+    state: permissive

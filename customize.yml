@@ -1,0 +1,19 @@
+---
+- name: "Configuration de base du poste local"
+  hosts: localhost
+  gather_facts: true
+  become: yes
+  become_method: sudo
+  roles:
+    - role: "gecos_root"
+    - role: "outils-base"
+    - role: "zsh"
+    - role: "vimrc"
+    - role: "selinux"
+      vars:
+        enableselinux: no
+      when: ansible_distribution_file_variety == "Redhat"
+    - role: "disable-swap"
+      when: ansible_distribution_file_variety == "Redhat"
+    - role: "epel"
+      when: ansible_distribution_file_variety == "Redhat"

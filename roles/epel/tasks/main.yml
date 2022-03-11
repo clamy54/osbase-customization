@@ -1,0 +1,5 @@
+---
+# tasks file for epel
+- name: "Installation EPEL Repo"
+  package: name=epel-release state=latest
+  tags: epel

@@ -1,0 +1,8 @@
+---
+# tasks file for selinux
+- include: "disabled.yml"
+  when: enableselinux|default(False) == False
+  tags: selinux
+- include: "enabled.yml"
+  when: enableselinux|default(False) == True
+  tags: selinux

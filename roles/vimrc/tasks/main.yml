@@ -1,0 +1,16 @@
+---
+# tasks file for vimrc
+- name: "Copy .vimrc"
+  copy:
+    src: "vimrc"
+    dest: "/root/.vimrc"
+    owner: "root"
+    group: "root"
+    mode: 0644
+- name: "Copy .vimrc to skel"
+  copy:
+    src: "vimrc"
+    dest: "/etc/skel/.vimrc"
+    owner: "root"
+    group: "root"
+    mode: 0644

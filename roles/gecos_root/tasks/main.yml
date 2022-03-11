@@ -1,0 +1,8 @@
+---
+# tasks file for gecos_root
+- name: Change gecos for root
+  user:
+    name: root
+    comment: Root de {{ ansible_hostname }}
+    uid: 0
+  tags: gecos_root

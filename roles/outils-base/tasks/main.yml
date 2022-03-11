@@ -1,0 +1,42 @@
+---
+# tasks file for outils-base
+- name: "Installation vim"
+  package: name=vim state=latest
+  tags: outils-base
+- name: "Installation open-vm-tools"
+  package: name=open-vm-tools state=latest
+  tags: outils-base
+- name: "Installation net-tools"
+  package: name=net-tools state=latest
+  tags: outils-base
+- name: "Installation bind-utils"
+  package: name=bind-utils state=latest
+  tags: outils-base
+  when: ansible_distribution_file_variety == "Redhat"
+- name: "Installation bind9-dnsutils"
+  package: name=bind9-dnsutils state=latest
+  tags: outils-base
+  when: ansible_distribution_file_variety == "Debian"
+- name: "Installation python"
+  package: name=python3 state=latest
+  tags: outils-base
+- name: "Set alternatives python3 -> python"
+  alternatives:
+    name: python
+    path: /usr/bin/python3
+  when: ansible_distribution_file_variety == "Redhat"
+- name: "Set alternatives python3 -> python"
+  alternatives:
+    name: python
+    link: /usr/bin/python
+    path: /usr/bin/python3
+  when: ansible_distribution_file_variety == "Debian" 
+- name: "Installation git"
+  package: name=git state=latest
+  tags: outils-base
+- name: "Installation curl"
+  package: name=curl state=latest
+  tags: outils-base
+- name: "Installation wget"
+  package: name=wget state=latest
+  tags: outils-base

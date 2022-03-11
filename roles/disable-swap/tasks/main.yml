@@ -1,0 +1,10 @@
+---
+# tasks file for disable-swap
+- name: Desactivation du swap en utilisation
+  shell: |
+    swapoff -a
+- name: Desactivation du swap dans fstab
+  replace:
+    path: /etc/fstab
+    regexp: '^([^#].*?\sswap\s+defaults\s+.*)$'
+    replace: '# \1'

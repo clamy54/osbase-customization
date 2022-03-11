@@ -1,0 +1,54 @@
+---
+# tasks file for zsh
+- name: "zsh installation"
+  package: name=zsh state=latest
+  tags: zsh
+- name: "util-linux-user installation"
+  package: name=util-linux-user state=latest
+  when: ansible_distribution_file_variety == "Redhat"
+  tags: zsh
+- name: "passwd installation"
+  package: name=passwd state=latest
+  when: ansible_distribution_file_variety == "Debian"
+  tags: zsh
+- name: "Clean /root/.oh-my-zsh"
+  file:
+    state: absent
+    path: "/root/.oh-my-zsh/"
+- name: "Installing ohmyzsh"
+  shell: unset ZSH && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+- name: "Change shell"
+  shell: chsh -s /usr/bin/zsh
+- name: "Installation du theme CL"
+  get_url:
+    url: https://raw.githubusercontent.com/clamy54/cl-zsh-theme/main/cl.zsh-theme
+    dest: /root/.oh-my-zsh/themes/cl.zsh-theme
+    mode: "0644"
+- name: "Copy .zshrc"
+  copy:
+    src: "zshrc"
+    dest: "/root/.zshrc"
+    owner: "root"
+    group: "root"
+    mode: 0644
+- name: "Copy .zshrc to skel"
+  copy:
+    src: "zshrc"
+    dest: "/etc/skel/.zshrc"
+    owner: "root"
+    group: "root"
+    mode: 0644
+- name: "Copy .oh-my-zsh to skel"
+  copy:
+    src: "/root/.oh-my-zsh"
+    dest: "/etc/skel/"
+    remote_src: yes
+    owner: "root"
+    group: "root"
+- name: "Copy default useradd configuration"
+  copy:
+    src: "useradd"
+    dest: "/etc/default/useradd"
+    owner: "root"
+    group: "root"
+    mode: 0644
