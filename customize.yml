@@ -12,8 +12,8 @@
     - role: "selinux"
       vars:
         enableselinux: no
-      when: ansible_distribution_file_variety == "Redhat"
+      when: ansible_distribution_file_variety == "RedHat"
     - role: "disable-swap"
-      when: ansible_distribution_file_variety == "Redhat"
+      when: ansible_distribution_file_variety == "RedHat"
     - role: "epel"
-      when: ansible_distribution_file_variety == "Redhat"
+      when: ansible_distribution_file_variety == "RedHat"
