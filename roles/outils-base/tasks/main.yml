@@ -9,6 +9,10 @@
 - name: "Installation net-tools"
   package: name=net-tools state=latest
   tags: outils-base
+- name: "Installation util-linux-user"
+  package: name=util-linux-user state=latest
+  tags: outils-base
+  when: ansible_distribution_file_variety == "Redhat"
 - name: "Installation bind-utils"
   package: name=bind-utils state=latest
   tags: outils-base
